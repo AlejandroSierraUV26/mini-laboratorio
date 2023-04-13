@@ -61,10 +61,56 @@ public class App {
             perro1.MostrarDatos();
             JOptionPane.showMessageDialog(null, "Usted eligio Perro", null, 0);
         }
+        else if(opcion_animal == 2){
+            Gato gato1 = new Gato(nombre,numero_patas,años,cantidad_vacunas,precio,raza,pais_origen,vacuna,color);
+            gato1.MostrarDatos();
+            JOptionPane.showMessageDialog(null, "Usted eligio Gato", null, 0);
+            
+        }
         
     }
-    public static void Actualizar_Mascota() {
+    public static void Actualizar_Mascota(Perro p1) {
+        String nombre;
+        byte años, cantidad_vacunas;
+        int precio,opcion;
+        Vacunas vacuna;
+        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Que desea cambiar de su mascota\n1.Cambia el nombre del perro.\n2. Cambiar la edad del perro\n3. Cambia el total de vacunas y agrega una nueva.(Aun no disponible)\n4.Cambiar el precio de la mascota"));
+        switch(opcion){
+            case 1:
+            //Cambia el nombre del perro.
+            System.out.println("Cambia el nombre");
+            System.out.println("Nombre actual : "+p1.getNombre());
+            nombre = JOptionPane.showInputDialog(null, "Ingrese el nuevo nombre del perro:");
+            p1.setNombre(nombre);
+            System.out.println("Nombre nuevo : " + p1.getNombre());
+            break;
+            case 2:
+            //Cambiar la edad del perro
+            System.out.println("Cambia edad");
+            System.out.println("Edad anterior : "+p1.getAños());
+            años = Byte.parseByte(JOptionPane.showInputDialog(null, "Ingrese la edad nueva del perro:"));
+            p1.setAños(años);
+            System.out.println("Edad nueva : " + p1.getAños());
+            break;
+            case 3:
+            //Cambia el total de vacunas y agrega una nueva.
+            
+            System.out.println("Total Vacunas anteriores : "+p1.getCantidad_vacunas());
+            años = Byte.parseByte(JOptionPane.showInputDialog(null, "Ingrese la edad nueva del perro:"));
+            p1.setAños(años);
+            System.out.println("Edad nueva : " + p1.getAños());
+            break;
+            case 4:
+            //Cambiar el precio de la mascota
+            System.out.println("Cambia precio");
+            System.out.println("Precio anterior: "+p1.getPrecio());
+            precio = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el precio nuevo de su mascota"));
+            p1.setPrecio(precio);
+            System.out.println("Precio nuevo : " + p1.getPrecio());
+
+        }
         System.out.println("Esta Opcion Actualizara los datos de su mascota");
+        p1.MostrarDatos();
     }
     public static void Eliminar_Mascota() {
         System.out.println("Esta Opcion Eliminara a su mascota de la veterinaria");
@@ -91,11 +137,13 @@ public class App {
     }
     public static void main(String[] args) throws Exception {
         System.out.println("Bienvenido a nuestra veterinaria");
+        Gato gato1 = new Gato("Mia", (byte)4, (byte)5, (byte)2, 5000000, Raza.Labradores, Pais_Origen.Colombia, Vacunas.rabia,"Dorado");
+        Perro perro1 = new Perro("Kira", (byte)4, (byte)5, (byte)2, 5000000, Raza.Labradores, Pais_Origen.Colombia, Vacunas.rabia,"Dorado");
         String opcion ="",opcion2 ="";
         opcion = JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas", null);
         switch(opcion){
             case "1":Insertar_Mascota();break;
-            case "2":Actualizar_Mascota();break;
+            case "2":Actualizar_Mascota(perro1);break;
             case "3":Eliminar_Mascota();break;
             case "4":Buscar_Mascota();break;
             case "5":Listar_Todas_Mascotas();break;
