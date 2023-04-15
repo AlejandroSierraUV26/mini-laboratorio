@@ -2,9 +2,8 @@ package logica;
 
 public class Gato extends Mascota{
     public Gato(String nombre,byte numero_patas,byte años,byte cantidad_vacunas, 
-    int precio,Raza raza,Pais_Origen pais_origen,
-    Vacunas vacuna,String color){
-        super(nombre,numero_patas,años,cantidad_vacunas,precio,raza,pais_origen, vacuna, color);
+    int precio,Raza raza,Pais_Origen pais_origen,String color){
+        super(nombre,numero_patas,años,precio,raza,pais_origen,color);
     }
     public void MostrarDatos(){
         System.out.println("Nombre: " + getNombre()+"\n" 
@@ -14,7 +13,6 @@ public class Gato extends Mascota{
                         +  "Precio : "+ getPrecio() +"\n"
                         +  "Raza : " + getRaza() +"\n"
                         +  "Pais Origen : " + getPais_origen() +"\n"                
-                        +  "Vacunas : "+ getVacuna() +"\n"
                         +  "Color Pelage : "+ getColor()); 
     }
 }

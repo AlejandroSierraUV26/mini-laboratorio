@@ -1,26 +1,27 @@
 package logica;
 
+import java.util.ArrayList;
+
 public class Mascota {
     private String nombre;
     private byte numero_patas = 4;
     private byte años;
-    private byte cantidad_vacunas;
+    private static byte cantidad_vacunas;
     private int precio;
     private Raza raza;
     private Pais_Origen pais_origen;
-    private Vacunas vacuna;
+    ArrayList <Vacuna> vacunas;
     private String color;
-    public Mascota(String nombre,byte numero_patas,byte años,byte cantidad_vacunas, 
+    public Mascota(String nombre,byte numero_patas,byte años, 
                    int precio,Raza raza,Pais_Origen pais_origen,
-                   Vacunas vacuna,String color){
+                   String color){
                     this.nombre = nombre;
                     this.numero_patas =numero_patas;
                     this.años = años;
-                    this.cantidad_vacunas = cantidad_vacunas;
                     this.precio = precio;
                     this.raza = raza;
                     this.pais_origen = pais_origen;
-                    this.vacuna = vacuna;
+                    vacunas = new ArrayList<Vacuna>(); 
                     this.color = color;
 
     }
@@ -48,9 +49,6 @@ public class Mascota {
     public byte getCantidad_vacunas() {
         return cantidad_vacunas;
     }
-    public void setCantidad_vacunas(byte cantidad_vacunas) {
-        this.cantidad_vacunas = cantidad_vacunas;
-    }
     public int getPrecio() {
         return precio;
     }
@@ -69,17 +67,33 @@ public class Mascota {
     public void setPais_origen(Pais_Origen pais_origen) {
         this.pais_origen = pais_origen;
     }
-    public Vacunas getVacuna() {
-        return vacuna;
-    }
-    public void setVacuna(Vacunas vacuna) {
-        this.vacuna = vacuna;
-    }
     public String getColor() {
         return color;
     }
     public void setColor(String color) {
         this.color = color;
+    }
+    public void insertarInyeccion(Vacuna vacuna){
+        vacunas.add(vacuna);
+        cantidad_vacunas++;
+    }   
+    public byte cantidad_vacunas(){
+        return cantidad_vacunas;
+    }
+    public void imprimirVacunas(){
+        for(int i = 0; i < vacunas.size(); i++){
+            System.out.println(vacunas.get(i).getNombre());
+        }
+    }
+    public void MostrarDatos(){
+        System.out.println("Nombre: " + getNombre()+"\n" 
+                        +  "Numero de patas : " + getNumero_patas()+"\n"
+                        +  "Años : "+ getAños() +"\n"
+                        +  "Cantidad de Vacunas : " + getCantidad_vacunas()+ "\n"
+                        +  "Precio : "+ getPrecio() +"\n"
+                        +  "Raza : " + getRaza() +"\n"
+                        +  "Pais Origen : " + getPais_origen() +"\n"                
+                        +  "Color Pelage : "+ getColor()); 
     }
 
 }
