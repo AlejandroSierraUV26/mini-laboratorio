@@ -103,18 +103,21 @@ public class App {
     }
     public static void Buscar_Mascota(ArrayList<Mascota> lista_mascotas) {
         String nombre;
-        nombre = JOptionPane.showInputDialog(null,"Ingresa el nombre de tu mascota para buscarlo:");
-        nombre = lista_mascotas.get(0).getNombre();
-        for(int i=0; i<lista_mascotas.size(); i++){
-            if(lista_mascotas.get(i).getNombre()==nombre){
-                System.out.println("AQUI ESTA TU MASCOTA");
+        nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de su mascota");
+        JOptionPane.showMessageDialog(null,"El perro en la posicion 1 es : " +lista_mascotas.get(0).getNombre());
+        for(int i=0; i<lista_mascotas.size();i++){
+            if(lista_mascotas.get(i).getNombre().equals(nombre)){
+                System.out.println("Verdadero existe");
                 lista_mascotas.get(i).MostrarDatos();
+
             }
             else{
-                System.out.println("Mascota no encotrada");
+                System.out.println("No existe");
             }
         }
-    }
+        
+
+    }   
     public static void Listar_Todas_Mascotas() {
         System.out.println("Esta Opcion sera para Mostrar todos las mascotas existentes");
     }
