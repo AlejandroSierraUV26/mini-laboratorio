@@ -132,8 +132,19 @@ public class App {
         
 
     }   
-    public static void Listar_Todas_Mascotas() {
-        System.out.println("Esta Opcion sera para Mostrar todos las mascotas existentes");
+    public static void Listar_Todas_Mascotas(ArrayList<Mascota> lista_mascotas) {
+        if(lista_mascotas.size()==0){
+            System.out.println("No hay Mascotas en la Veterinaria");
+        }
+        for (int i = 0; i < lista_mascotas.size(); i++){
+            System.out.println("\n");
+            System.out.println("-------------------------------------");
+            System.out.println("\n");
+            System.out.println("Mascota "+ (i+1));
+            lista_mascotas.get(i).MostrarDatos();
+            System.out.println("-------------------------------------");
+            System.out.println("\n");
+        }
     }
     public static void Opciones_Funcionales() {
         System.out.println("Opcion 1: Que mascota tienen la vacuna malota");
@@ -155,11 +166,11 @@ public class App {
         byte opcion,opcion2;
         opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas", null));
         switch(opcion){
-            case 1:Insertar_Mascota(lista_mascotas);break;
+            case 1:Insertar_Mascota(lista_mascotas);Listar_Todas_Mascotas(lista_mascotas);break;
             case 2:Actualizar_Mascota(lista_mascotas);break;
             case 3:Eliminar_Mascota(lista_mascotas);break;
             case 4:Buscar_Mascota(lista_mascotas);break;
-            case 5:Listar_Todas_Mascotas();break;
+            case 5:Listar_Todas_Mascotas(lista_mascotas);break;
             default:
             break;
         }
