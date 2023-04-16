@@ -57,6 +57,9 @@ public class App {
         
     }
     public static void Actualizar_Mascota(ArrayList<Mascota> lista_mascotas) {
+        int i=0;
+        i = Buscar_Mascota(lista_mascotas);
+        if(i>=0){
         String nombre,nombre_vacuna;
         byte años;
         int precio,opcion;
@@ -65,56 +68,60 @@ public class App {
             case 1:
             //Cambia el nombre del perro.
             System.out.println("Cambia el nombre");
-            System.out.println("Nombre actual : "+lista_mascotas.get(0).getNombre());
+            System.out.println("Nombre actual : "+lista_mascotas.get(i).getNombre());
             nombre = JOptionPane.showInputDialog(null, "Ingrese el nuevo nombre del perro:");
-            lista_mascotas.get(0).setNombre(nombre);
-            System.out.println("Nombre nuevo : " + lista_mascotas.get(0).getNombre());
+            lista_mascotas.get(i).setNombre(nombre);
+            System.out.println("Nombre nuevo : " + lista_mascotas.get(i).getNombre());
             break;
             case 2:
             //Cambiar la edad del perro
             System.out.println("Cambia edad");
-            System.out.println("Edad anterior : "+lista_mascotas.get(0).getAños());
+            System.out.println("Edad anterior : "+lista_mascotas.get(i).getAños());
             años = Byte.parseByte(JOptionPane.showInputDialog(null, "Ingrese la edad nueva del perro:"));
-            lista_mascotas.get(0).setAños(años);
-            System.out.println("Edad nueva : " + lista_mascotas.get(0).getAños());
+            lista_mascotas.get(i).setAños(años);
+            System.out.println("Edad nueva : " + lista_mascotas.get(i).getAños());
             break;
             case 3:
             //Cambia el total de vacunas y agrega una nueva.
             nombre_vacuna = JOptionPane.showInputDialog(null ,"Ingrese el nombre de la vacuna");
             Vacuna v1 = new Vacuna(nombre_vacuna,(byte)1);
-            lista_mascotas.get(0).insertarInyeccion(v1);
-            lista_mascotas.get(0).imprimirVacunas();
-            JOptionPane.showMessageDialog(null,"Cantidad de vacunas actuales: " +lista_mascotas.get(0).cantidad_vacunas());
+            lista_mascotas.get(i).insertarInyeccion(v1);
+            lista_mascotas.get(i).imprimirVacunas();
+            JOptionPane.showMessageDialog(null,"Cantidad de vacunas actuales: " +lista_mascotas.get(i).cantidad_vacunas());
             break;
             case 4:
             //Cambiar el precio de la mascota
             System.out.println("Cambia precio");
-            System.out.println("Precio anterior: "+lista_mascotas.get(0).getPrecio());
+            System.out.println("Precio anterior: "+lista_mascotas.get(i).getPrecio());
             precio = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el precio nuevo de su mascota"));
-            lista_mascotas.get(0).setPrecio(precio);
-            System.out.println("Precio nuevo : " + lista_mascotas.get(0).getPrecio());
+            lista_mascotas.get(i).setPrecio(precio);
+            System.out.println("Precio nuevo : " + lista_mascotas.get(i).getPrecio());
 
         }
         System.out.println("Esta Opcion Actualizara los datos de su mascota");
-        lista_mascotas.get(0).MostrarDatos();
+        lista_mascotas.get(i).MostrarDatos();
+        }
+        else{
+            JOptionPane.showMessageDialog(null,"Al parecer esa mascota no esta aqui");
+        }
     }
     public static void Eliminar_Mascota() {
         System.out.println("Esta Opcion Eliminara a su mascota de la veterinaria");
     }
-    public static void Buscar_Mascota(ArrayList<Mascota> lista_mascotas) {
+    public static int Buscar_Mascota(ArrayList<Mascota> lista_mascotas) {
         String nombre;
         nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de su mascota");
-        JOptionPane.showMessageDialog(null,"El perro en la posicion 1 es : " +lista_mascotas.get(0).getNombre());
         for(int i=0; i<lista_mascotas.size();i++){
             if(lista_mascotas.get(i).getNombre().equals(nombre)){
                 System.out.println("Verdadero existe");
                 lista_mascotas.get(i).MostrarDatos();
-
+                return i;
             }
             else{
                 System.out.println("No existe");
             }
         }
+        return -1;
         
 
     }   
