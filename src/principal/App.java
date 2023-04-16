@@ -1,6 +1,5 @@
 package principal;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
 import logica.Gato;
 import logica.Mascota;
@@ -162,7 +161,15 @@ public class App {
         }
         System.out.println("Muestra que mascotas tienen la vacuna malota");
     }
-    public static void Mayor_Precio_Mascotas(){
+    public static void Mayor_Precio_Mascotas(ArrayList<Mascota> lista_mascotas){
+        int mayor;
+        mayor = lista_mascotas.get(0).getPrecio();                                                                                                      
+        for (int i = 0; i < lista_mascotas.size(); i++){
+            if(mayor>lista_mascotas.get(i).getPrecio())
+                mayor = lista_mascotas.get(i).getPrecio(); 
+            
+        }
+
         System.out.println("Muestra el top 5 de las mascotas mas costosas");
     }
     public static void Lista_Origen_Mascotas(){
@@ -200,7 +207,7 @@ public class App {
         opcion2 = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Qué mascotas tienen la vacuna malota\n2. Cual es el top 5 de las mascotas más costosas.\n3. Que mascotas no tienen país de origen en latinoamérica.", null));
         switch (opcion2) {
             case 1:VacunaMalota(lista_mascotas);break;
-            case 2:Mayor_Precio_Mascotas();break;
+            case 2:Mayor_Precio_Mascotas(lista_mascotas);break;
             case 3:Lista_Origen_Mascotas();break;
             default:
                 break;
