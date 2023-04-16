@@ -1,5 +1,6 @@
 package principal;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 import logica.Gato;
 import logica.Mascota;
@@ -146,12 +147,19 @@ public class App {
             System.out.println("\n");
         }
     }
-    public static void Opciones_Funcionales() {
-        System.out.println("Opcion 1: Que mascota tienen la vacuna malota");
-        System.out.println("Opcion 2: Cual es el top 5 de las mascotas más costosas");
-        System.out.println("Opcion 3: Que mascotas no tienen país de origen en latinoamérica");
-    }
-    public static void VacunaMalota(){
+    public static void VacunaMalota(ArrayList<Mascota> lista_mascotas){
+        ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+        for (int i = 0; i < lista_mascotas.size();i++){
+            vacunas = lista_mascotas.get(i).getVacunas();
+        }
+        for(int i=0; i<vacunas.size();i++){
+            if(vacunas.get(i).getNombre().equals("malota")){
+                System.out.println("La mascota [" + lista_mascotas.get(i).getNombre()+ "] tiene la vacuna malota");
+            }
+            else{
+                System.out.println("Ninguna mascota tiene la vacuna malota");
+            }
+        }
         System.out.println("Muestra que mascotas tienen la vacuna malota");
     }
     public static void Mayor_Precio_Mascotas(){
@@ -160,23 +168,38 @@ public class App {
     public static void Lista_Origen_Mascotas(){
         System.out.println("Lista origen mascotas");
     }
+    public static void Aplicar_Inyeccion(ArrayList<Mascota> lista_mascotas){
+        ArrayList<String> lista_vacunas = new ArrayList<String>();
+        lista_vacunas.add("malota");
+        lista_vacunas.add("rabia");
+        lista_vacunas.add("mejorcito");
+        lista_vacunas.add("alivio2000");
+
+        int i,numero_vacuna;
+        i = Buscar_Mascota(lista_mascotas);
+        numero_vacuna = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese que vacuna desea inyectar \n 1. Malota\n 2. Rabia \n 3. Mejorcito \n 4. Alivio2000"));
+        Vacuna vacuna = new Vacuna(lista_vacunas.get(numero_vacuna-1),(byte)2);
+        lista_mascotas.get(i).insertarInyeccion(vacuna);
+        lista_mascotas.get(i).imprimirVacunas();
+    }
     public static void main(String[] args) throws Exception {
         System.out.println("Bienvenido a nuestra veterinaria");
         ArrayList <Mascota> lista_mascotas = new ArrayList<Mascota>();
         byte opcion,opcion2;
-        opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas", null));
+        opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas\n6. Aplicar Vacuna", null));
         switch(opcion){
-            case 1:Insertar_Mascota(lista_mascotas);Listar_Todas_Mascotas(lista_mascotas);break;
+            case 1:Insertar_Mascota(lista_mascotas);break;
             case 2:Actualizar_Mascota(lista_mascotas);break;
             case 3:Eliminar_Mascota(lista_mascotas);break;
             case 4:Buscar_Mascota(lista_mascotas);break;
             case 5:Listar_Todas_Mascotas(lista_mascotas);break;
+            case 6:Aplicar_Inyeccion(lista_mascotas);break;
             default:
             break;
         }
         opcion2 = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Qué mascotas tienen la vacuna malota\n2. Cual es el top 5 de las mascotas más costosas.\n3. Que mascotas no tienen país de origen en latinoamérica.", null));
         switch (opcion2) {
-            case 1:VacunaMalota();break;
+            case 1:VacunaMalota(lista_mascotas);break;
             case 2:Mayor_Precio_Mascotas();break;
             case 3:Lista_Origen_Mascotas();break;
             default:

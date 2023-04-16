@@ -25,6 +25,15 @@ public class Mascota {
                     this.color = color;
 
     }
+    
+    public ArrayList<Vacuna> getVacunas() {
+        return vacunas;
+    }
+
+    public void setVacunas(ArrayList<Vacuna> vacunas) {
+        this.vacunas = vacunas;
+    }
+
     public String getNombre() {
         return nombre;
     }
