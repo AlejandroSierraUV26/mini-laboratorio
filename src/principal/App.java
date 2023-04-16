@@ -105,7 +105,14 @@ public class App {
             JOptionPane.showMessageDialog(null,"Al parecer esa mascota no esta aqui");
         }
     }
-    public static void Eliminar_Mascota() {
+    public static void Eliminar_Mascota(ArrayList<Mascota> lista_mascotas){
+        int i= 0;
+        i = Buscar_Mascota(lista_mascotas);
+        if (!lista_mascotas.isEmpty())
+            lista_mascotas.remove(i);
+        else
+            System.out.println("La lista está vacía. No puedes borrar más elementos.");
+
         System.out.println("Esta Opcion Eliminara a su mascota de la veterinaria");
     }
     public static int Buscar_Mascota(ArrayList<Mascota> lista_mascotas) {
@@ -148,9 +155,9 @@ public class App {
         byte opcion,opcion2;
         opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas", null));
         switch(opcion){
-            case 1:Insertar_Mascota(lista_mascotas);Buscar_Mascota(lista_mascotas);break;
+            case 1:Insertar_Mascota(lista_mascotas);break;
             case 2:Actualizar_Mascota(lista_mascotas);break;
-            case 3:Eliminar_Mascota();break;
+            case 3:Eliminar_Mascota(lista_mascotas);break;
             case 4:Buscar_Mascota(lista_mascotas);break;
             case 5:Listar_Todas_Mascotas();break;
             default:
