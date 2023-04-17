@@ -162,15 +162,32 @@ public class App {
         System.out.println("Muestra que mascotas tienen la vacuna malota");
     }
     public static void Mayor_Precio_Mascotas(ArrayList<Mascota> lista_mascotas){
-        int mayor;
-        mayor = lista_mascotas.get(0).getPrecio();                                                                                                      
-        for (int i = 0; i < lista_mascotas.size(); i++){
-            if(mayor>lista_mascotas.get(i).getPrecio())
-                mayor = lista_mascotas.get(i).getPrecio(); 
-            
+    System.out.println("Muestra el top 5 de las mascotas mas costosas");
+    int nElementos,precio_actual,precio_siguiente,contador=0;
+    Mascota aux = lista_mascotas.get(0);
+    nElementos = lista_mascotas.size();
+    
+    for(int i=0;i<nElementos-1;i++){ 
+        for(int j=0;j<nElementos-1;j++){
+            precio_actual = lista_mascotas.get(j).getPrecio();
+            precio_siguiente = lista_mascotas.get(j+1).getPrecio();
+            if(precio_actual > precio_siguiente){
+                aux = lista_mascotas.get(j);
+                lista_mascotas.set(j,lista_mascotas.get(j+1));
+                lista_mascotas.set(j+1,aux);
+                }
+            }
         }
-
-        System.out.println("Muestra el top 5 de las mascotas mas costosas");
+    for (int i=0;i<lista_mascotas.size();i++){
+        if(contador==5){
+            i=lista_mascotas.size()+1;
+        }
+        System.out.println("Mascota "+(i+1));
+        System.out.println("\n");
+        System.out.println(lista_mascotas.get(i).getNombre());
+        System.out.println("$" + lista_mascotas.get(i).getPrecio());
+        contador=contador+1;
+    }
     }
     public static void Lista_Origen_Mascotas(){
         System.out.println("Lista origen mascotas");
@@ -193,7 +210,8 @@ public class App {
         System.out.println("Bienvenido a nuestra veterinaria");
         ArrayList <Mascota> lista_mascotas = new ArrayList<Mascota>();
         byte opcion,opcion2;
-        opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas\n6. Aplicar Vacuna", null));
+        while(true){
+        opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas\n6. Aplicar Vacuna\n7. Salir", null));
         switch(opcion){
             case 1:Insertar_Mascota(lista_mascotas);break;
             case 2:Actualizar_Mascota(lista_mascotas);break;
@@ -201,6 +219,7 @@ public class App {
             case 4:Buscar_Mascota(lista_mascotas);break;
             case 5:Listar_Todas_Mascotas(lista_mascotas);break;
             case 6:Aplicar_Inyeccion(lista_mascotas);break;
+            case 7: System.exit(0);
             default:
             break;
         }
@@ -212,6 +231,7 @@ public class App {
             default:
                 break;
         }
+    }
         
         /*
         System.out.println("\n\n");
