@@ -5,37 +5,31 @@ import logica.Gato;
 import logica.Mascota;
 import logica.Pais_Origen;
 import logica.Perro;
-import logica.Raza;
 import logica.Vacuna;
 public class App {
     public static void Insertar_Mascota(ArrayList<Mascota> lista_mascotas) {
-        String nombre,color;
-        byte numero_patas, años, cantidad_vacunas;
+        String nombre,color,raza;
+        byte numero_patas, años, cantidad_vacunas=0;
         int precio,opcion,opcion_animal;
-        Raza raza;
         Pais_Origen pais_origen;
         nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de su mascota");
         color = JOptionPane.showInputDialog(null,"Ingrese el color de su mascota");
         numero_patas = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese el numero de piernas de su mascota"));
         años = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese el año de su mascota"));
-        cantidad_vacunas = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese la cantidad de vacunas de su mascota"));
         precio = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el valor de su mascota"));
-        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese que raza es su animal"));
-        switch(opcion){
-            case 1:raza = Raza.Labradores;break;
-            case 2:raza = Raza.Pastor;break;
-            case 3:raza = Raza.Pub;break;
-            case 4:raza = Raza.Tacita;break;
-            default: raza = null;break;
-        }
+        raza = JOptionPane.showInputDialog(null,"Ingrese la raza de su mascota: ");
         opcion = 0;
-        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese que pais de origen es su animal"));
+        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese que pais de origen es su animal\n1. Colombia\n2. España\n3. Alemania\n4. Inglaterra\n5. Ecuador\n6. Brasil \n7. Canada\n8. Noruega"));
         switch(opcion){
-            case 1:pais_origen = Pais_Origen.Alemania;break;
-            case 2:pais_origen = Pais_Origen.Colombia;break;
-            case 3:pais_origen = Pais_Origen.USA;break;
-            case 4:pais_origen = Pais_Origen.España;break;
-            case 5:pais_origen = Pais_Origen.Inglaterra;break;
+            //Colombia,España,USA,Alemania,Inglaterra,Ecuador,Brasil,Canada,Noruega
+            case 1:pais_origen = Pais_Origen.Colombia;break;
+            case 2:pais_origen = Pais_Origen.España;break;
+            case 3:pais_origen = Pais_Origen.Alemania;break;
+            case 4:pais_origen = Pais_Origen.Inglaterra;break;
+            case 5:pais_origen = Pais_Origen.Ecuador;break;
+            case 6:pais_origen = Pais_Origen.Brasil;break;
+            case 7:pais_origen = Pais_Origen.Canada;break;
+            case 8:pais_origen = Pais_Origen.Noruega;break;
             default:pais_origen =null;break;
         }
         //Puede ser una o pueden ser varias.
@@ -50,7 +44,6 @@ public class App {
         else if(opcion_animal == 2){
             Gato gato1 = new Gato(nombre,numero_patas,años,cantidad_vacunas,precio,raza,pais_origen,color);
             gato1.MostrarDatos();
-            JOptionPane.showMessageDialog(null, "Usted eligio Gato", null, 0);
             lista_mascotas.add(gato1);
         }
 
@@ -189,7 +182,21 @@ public class App {
         contador=contador+1;
     }
     }
-    public static void Lista_Origen_Mascotas(){
+    public static void Lista_Origen_Mascotas(ArrayList<Mascota> lista_mascotas){
+        ArrayList<Pais_Origen> lista_paises = new ArrayList<Pais_Origen>();
+        lista_paises.add(Pais_Origen.Brasil);
+        lista_paises.add(Pais_Origen.Colombia);
+        lista_paises.add(Pais_Origen.Ecuador);
+        for(int i=0; i<lista_paises.size(); i++){
+            for(int j=0; j<lista_mascotas.size(); j++){
+                if(lista_mascotas.get(j).getPais_origen() ==lista_paises.get(i)){
+                    System.out.println("Su mascota"+lista_mascotas.get(j).getNombre()+" esta dentro de latinoamerica");
+                }
+                else if(i==lista_paises.size()-1){
+                    System.out.println("Su mascota "+lista_mascotas.get(j).getNombre() +" tiene origen fuera de latinoamerica");
+                }
+        }
+    }
         System.out.println("Lista origen mascotas");
     }
     public static void Aplicar_Inyeccion(ArrayList<Mascota> lista_mascotas){
@@ -227,7 +234,7 @@ public class App {
         switch (opcion2) {
             case 1:VacunaMalota(lista_mascotas);break;
             case 2:Mayor_Precio_Mascotas(lista_mascotas);break;
-            case 3:Lista_Origen_Mascotas();break;
+            case 3:Lista_Origen_Mascotas(lista_mascotas);break;
             default:
                 break;
         }

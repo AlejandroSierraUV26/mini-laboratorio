@@ -8,12 +8,12 @@ public class Mascota {
     private byte años;
     private static byte cantidad_vacunas;
     private int precio;
-    private Raza raza;
+    private String raza;
     private Pais_Origen pais_origen;
     ArrayList <Vacuna> vacunas;
     private String color;
     public Mascota(String nombre,byte numero_patas,byte años, 
-                   int precio,Raza raza,Pais_Origen pais_origen,
+                   int precio,String raza,Pais_Origen pais_origen,
                    String color){
                     this.nombre = nombre;
                     this.numero_patas =numero_patas;
@@ -64,10 +64,10 @@ public class Mascota {
     public void setPrecio(byte precio) {
         this.precio = precio;
     }
-    public Raza getRaza() {
+    public String getRaza() {
         return raza;
     }
-    public void setRaza(Raza raza) {
+    public void setRaza(String raza) {
         this.raza = raza;
     }
     public Pais_Origen getPais_origen() {
