@@ -57,7 +57,11 @@ public class App {
         String nombre,nombre_vacuna;
         byte años;
         int precio,opcion;
-        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Que desea cambiar de su mascota\n1.Cambia el nombre del perro.\n2. Cambiar la edad del perro\n3. Cambia el total de vacunas y agrega una nueva.(Aun no disponible)\n4.Cambiar el precio de la mascota"));
+        opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Que desea cambiar de su mascota\n"
+        +"1.Cambia el nombre del perro.\n"
+        +"2. Cambiar la edad del perro\n"
+        +"3. Cambia el total de vacunas y agrega una nueva.(Aun no disponible)\n"
+        +"4.Cambiar el precio de la mascota"));
         switch(opcion){
             case 1:
             //Cambia el nombre del perro.
