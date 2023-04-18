@@ -164,7 +164,7 @@ public class App {
         for(int j=0;j<nElementos-1;j++){
             precio_actual = lista_mascotas.get(j).getPrecio();
             precio_siguiente = lista_mascotas.get(j+1).getPrecio();
-            if(precio_actual > precio_siguiente){
+            if(precio_actual < precio_siguiente){
                 aux = lista_mascotas.get(j);
                 lista_mascotas.set(j,lista_mascotas.get(j+1));
                 lista_mascotas.set(j+1,aux);
