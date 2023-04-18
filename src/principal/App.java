@@ -13,12 +13,13 @@ public class App {
         int precio,opcion,opcion_animal;
         Pais_Origen pais_origen;
         nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de su mascota");
-        color = JOptionPane.showInputDialog(null,"Ingrese el color de su mascota");
-        numero_patas = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese el numero de piernas de su mascota"));
         años = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese el año de su mascota"));
+        numero_patas = Byte.parseByte(JOptionPane.showInputDialog(null,"Ingrese el numero de piernas de su mascota"));
+        color = JOptionPane.showInputDialog(null,"Ingrese el color de su mascota");
         precio = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el valor de su mascota"));
         raza = JOptionPane.showInputDialog(null,"Ingrese la raza de su mascota: ");
         opcion = 0;
+        //Origen
         opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese que pais de origen es su animal\n1. Colombia\n2. España\n3. Alemania\n4. Inglaterra\n5. Ecuador\n6. Brasil \n7. Canada\n8. Noruega"));
         switch(opcion){
             //Colombia,España,USA,Alemania,Inglaterra,Ecuador,Brasil,Canada,Noruega
