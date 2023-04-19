@@ -1,4 +1,5 @@
 package principal;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import logica.Gato;
@@ -7,7 +8,8 @@ import logica.Pais_Origen;
 import logica.Perro;
 import logica.Vacuna;
 public class App {
-    public static void Insertar_Mascota(ArrayList<Mascota> lista_mascotas) {
+    public static void Insertar_Mascota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         String nombre,color,raza;
         byte numero_patas, años, cantidad_vacunas=0;
         int precio,opcion,opcion_animal;
@@ -50,8 +52,16 @@ public class App {
 
         
     }
-    public static void Actualizar_Mascota(ArrayList<Mascota> lista_mascotas) {
-        int i=0;
+    public static void Actualizar_Mascota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        if(lista_mascotas.size() ==0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Actualizar Mascota", null, 0);
+        }
+        else{
+            int i=0;
         i = Buscar_Mascota(lista_mascotas);
         if(i>=0){
         String nombre,nombre_vacuna;
@@ -62,6 +72,8 @@ public class App {
         +"2. Cambiar la edad del perro\n"
         +"3. Cambia el total de vacunas y agrega una nueva.(Aun no disponible)\n"
         +"4.Cambiar el precio de la mascota"));
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("=================================================================");
         switch(opcion){
             case 1:
             //Cambia el nombre del perro.
@@ -96,127 +108,187 @@ public class App {
             System.out.println("Precio nuevo : " + lista_mascotas.get(i).getPrecio());
 
         }
-        System.out.println("Esta Opcion Actualizara los datos de su mascota");
+        System.out.println("=================================================================");
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         lista_mascotas.get(i).MostrarDatos();
         }
         else{
             JOptionPane.showMessageDialog(null,"Al parecer esa mascota no esta aqui");
         }
+        }
     }
-    public static void Eliminar_Mascota(ArrayList<Mascota> lista_mascotas){
-        int i= 0;
-        i = Buscar_Mascota(lista_mascotas);
-        if (!lista_mascotas.isEmpty())
-            lista_mascotas.remove(i);
-        else
-            System.out.println("La lista está vacía. No puedes borrar más elementos.");
-
-        System.out.println("Esta Opcion Eliminara a su mascota de la veterinaria");
+    public static void Eliminar_Mascota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        if(lista_mascotas.size() ==0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Eliminar Mascota", null, 0);
+        }
+        else{
+            int i= 0;
+            i = Buscar_Mascota(lista_mascotas);
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            if (!lista_mascotas.isEmpty()){
+                lista_mascotas.remove(i);
+                System.out.println("----------------------------------------------------\n              Mascota Eliminada\n----------------------------------------------------");
+                JOptionPane.showMessageDialog(null, "Se elimino la mascota", null, 1);
+            }
+        }
+           
     }
-    public static int Buscar_Mascota(ArrayList<Mascota> lista_mascotas) {
+    public static int Buscar_Mascota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        if(lista_mascotas.size()== 0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Buscar Mascota", null, 0);
+        }
+        else{
         String nombre;
         nombre = JOptionPane.showInputDialog(null,"Ingrese el nombre de su mascota");
         for(int i=0; i<lista_mascotas.size();i++){
             if(lista_mascotas.get(i).getNombre().equals(nombre)){
-                System.out.println("Verdadero existe");
                 lista_mascotas.get(i).MostrarDatos();
                 return i;
             }
             else{
-                System.out.println("No existe");
+                System.out.println("-----------------------------------------------------------------");
+                System.out.println("        La mascota no existe en la veterinaria, ingresala.");
+                System.out.println("-----------------------------------------------------------------");
+                }
             }
         }
         return -1;
-        
 
     }   
-    public static void Listar_Todas_Mascotas(ArrayList<Mascota> lista_mascotas) {
+    public static void Listar_Todas_Mascotas(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException {
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         if(lista_mascotas.size()==0){
-            System.out.println("No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Alistar las Mascotas", null, 0);
         }
         for (int i = 0; i < lista_mascotas.size(); i++){
-            System.out.println("\n");
-            System.out.println("-------------------------------------");
-            System.out.println("\n");
-            System.out.println("Mascota "+ (i+1));
             lista_mascotas.get(i).MostrarDatos();
-            System.out.println("-------------------------------------");
-            System.out.println("\n");
         }
     }
-    public static void VacunaMalota(ArrayList<Mascota> lista_mascotas){
+    public static void VacunaMalota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
         ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
+        if(vacunas.size()==0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas con Vacunas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Conocer que Mascota tiene la vacuna MALOTA", null, 0);
+        }
         for (int i = 0; i < lista_mascotas.size();i++){
             vacunas = lista_mascotas.get(i).getVacunas();
         }
         for(int i=0; i<vacunas.size();i++){
+            
             if(vacunas.get(i).getNombre().equals("malota")){
-                System.out.println("La mascota [" + lista_mascotas.get(i).getNombre()+ "] tiene la vacuna malota");
+                System.out.println("-----------------------------------------------------------------");
+                System.out.println("        La mascota [" + lista_mascotas.get(i).getNombre()+ "] tiene la vacuna malota");
+                System.out.println("-----------------------------------------------------------------");
             }
             else{
-                System.out.println("Ninguna mascota tiene la vacuna malota");
+                System.out.println("-----------------------------------------------------------------");
+                System.out.println("        Ninguna mascota tiene la vacuna malota");
+                System.out.println("-----------------------------------------------------------------");
             }
         }
-        System.out.println("Muestra que mascotas tienen la vacuna malota");
     }
-    public static void Mayor_Precio_Mascotas(ArrayList<Mascota> lista_mascotas){
-    System.out.println("Muestra el top 5 de las mascotas mas costosas");
-    int nElementos,precio_actual,precio_siguiente,contador=0;
-    Mascota aux = lista_mascotas.get(0);
-    nElementos = lista_mascotas.size();
-    
-    for(int i=0;i<nElementos-1;i++){ 
-        for(int j=0;j<nElementos-1;j++){
-            precio_actual = lista_mascotas.get(j).getPrecio();
-            precio_siguiente = lista_mascotas.get(j+1).getPrecio();
-            if(precio_actual < precio_siguiente){
-                aux = lista_mascotas.get(j);
-                lista_mascotas.set(j,lista_mascotas.get(j+1));
-                lista_mascotas.set(j+1,aux);
+    public static void Mayor_Precio_Mascotas(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
+    new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+    if(lista_mascotas.size() == 0) {
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("        No hay Mascotas en la Veterinaria");
+        System.out.println("-----------------------------------------------------------------");
+    }
+    else{
+        int nElementos,precio_actual,precio_siguiente,contador=0;
+        Mascota aux = lista_mascotas.get(0);
+        nElementos = lista_mascotas.size();
+        for(int i=0;i<nElementos-1;i++){ 
+            for(int j=0;j<nElementos-1;j++){
+                precio_actual = lista_mascotas.get(j).getPrecio();
+                precio_siguiente = lista_mascotas.get(j+1).getPrecio();
+                if(precio_actual < precio_siguiente){
+                    aux = lista_mascotas.get(j);
+                    lista_mascotas.set(j,lista_mascotas.get(j+1));
+                    lista_mascotas.set(j+1,aux);
+                    }
                 }
             }
+        for (int i=0;i<lista_mascotas.size();i++){
+            if(contador==5){
+                i=lista_mascotas.size()+1;
+            }
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("                      Mascota "+(i+1));
+            System.out.println("                      "+lista_mascotas.get(i).getNombre());
+            System.out.println("                      $" + lista_mascotas.get(i).getPrecio());
+            System.out.println("-----------------------------------------------------------------");
+            contador=contador+1;
         }
-    for (int i=0;i<lista_mascotas.size();i++){
-        if(contador==5){
-            i=lista_mascotas.size()+1;
-        }
-        System.out.println("Mascota "+(i+1));
-        System.out.println("\n");
-        System.out.println(lista_mascotas.get(i).getNombre());
-        System.out.println("$" + lista_mascotas.get(i).getPrecio());
-        contador=contador+1;
     }
     }
-    public static void Lista_Origen_Mascotas(ArrayList<Mascota> lista_mascotas){
+    public static void Lista_Origen_Mascotas(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        if(lista_mascotas.size()==0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Cononcer el origen de la Mascota", null, 0);
+        }
+        else{
         ArrayList<Pais_Origen> lista_paises = new ArrayList<Pais_Origen>();
         lista_paises.add(Pais_Origen.Brasil);
         lista_paises.add(Pais_Origen.Colombia);
         lista_paises.add(Pais_Origen.Ecuador);
+        
         for(int i=0; i<lista_paises.size(); i++){
             for(int j=0; j<lista_mascotas.size(); j++){
+                System.out.println("-----------------------------------------------------------------");
                 if(lista_mascotas.get(j).getPais_origen() ==lista_paises.get(i)){
-                    System.out.println("Su mascota"+lista_mascotas.get(j).getNombre()+" esta dentro de latinoamerica");
+                    System.out.println("           Su mascota"+lista_mascotas.get(j).getNombre()+" esta dentro de latinoamerica");
                 }
                 else if(i==lista_paises.size()-1){
-                    System.out.println("Su mascota "+lista_mascotas.get(j).getNombre() +" tiene origen fuera de latinoamerica");
+                    System.out.println("           Su mascota "+lista_mascotas.get(j).getNombre() +" tiene origen fuera de latinoamerica");
                 }
+                System.out.println("-----------------------------------------------------------------");
+            }
         }
     }
-        System.out.println("Lista origen mascotas");
+        
     }
-    public static void Aplicar_Inyeccion(ArrayList<Mascota> lista_mascotas){
+    public static void Aplicar_Inyeccion(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
+        new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        if(lista_mascotas.size() == 0){
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("        No hay Mascotas en la Veterinaria");
+            System.out.println("-----------------------------------------------------------------");
+            JOptionPane.showMessageDialog(null, "No es posible Aplicar Vacuna Mascota", null, 0);
+        }
+        else{
         ArrayList<String> lista_vacunas = new ArrayList<String>();
         lista_vacunas.add("malota");
         lista_vacunas.add("rabia");
         lista_vacunas.add("mejorcito");
-        lista_vacunas.add("alivio2000");
-
+        lista_vacunas.add("alivio2000");   
+        //Comparar si la mascota ya tiene la vacuna
+        //Mensaje: Su mascota ya tiene esa inyeccion.
         int i,numero_vacuna;
         i = Buscar_Mascota(lista_mascotas);
         numero_vacuna = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese que vacuna desea inyectar \n 1. Malota\n 2. Rabia \n 3. Mejorcito \n 4. Alivio2000"));
         Vacuna vacuna = new Vacuna(lista_vacunas.get(numero_vacuna-1),(byte)2);
         lista_mascotas.get(i).insertarInyeccion(vacuna);
         lista_mascotas.get(i).imprimirVacunas();
+    
+        }
     }
     public static void main(String[] args) throws Exception {
         System.out.println("Bienvenido a nuestra veterinaria");

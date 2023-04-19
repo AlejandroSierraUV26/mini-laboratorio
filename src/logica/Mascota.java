@@ -90,19 +90,25 @@ public class Mascota {
         return cantidad_vacunas;
     }
     public void imprimirVacunas(){
+        System.out.println("-----------------------------------------------------------------");
         for(int i = 0; i < vacunas.size(); i++){
-            System.out.println(vacunas.get(i).getNombre());
+            System.out.println("-"+vacunas.get(i).getNombre());
         }
+        System.out.println("-----------------------------------------------------------------");
     }
     public void MostrarDatos(){
-        System.out.println("Nombre: " + getNombre()+"\n" 
-                        +  "Numero de patas : " + getNumero_patas()+"\n"
-                        +  "Años : "+ getAños() +"\n"
-                        +  "Cantidad de Vacunas : " + getCantidad_vacunas()+ "\n"
-                        +  "Precio : "+ getPrecio() +"\n"
-                        +  "Raza : " + getRaza() +"\n"
-                        +  "Pais Origen : " + getPais_origen() +"\n"                
-                        +  "Color Pelage : "+ getColor()); 
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("                         Datos Mascotas                          ");
+        System.out.println("-----------------------------------------------------------------");
+        System.out.println("            Nombre: " + getNombre()+"                            \n" 
+                        +  "            Numero de patas : " + getNumero_patas()+"            \n"
+                        +  "            Años : "+ getAños() +"                               \n"
+                        +  "            Cantidad de Vacunas : " + getCantidad_vacunas()+ "   \n"
+                        +  "            Precio : "+ getPrecio() +"                           \n"
+                        +  "            Raza : " + getRaza() +"                              \n"
+                        +  "            Pais Origen : " + getPais_origen() +"                \n"                
+                        +  "            Color Pelage : "+ getColor()+"                       "); 
+        System.out.println("----------------------------------------------------------------");
     }
 
 }
