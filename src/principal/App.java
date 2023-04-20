@@ -37,15 +37,24 @@ public class App {
         }
         //Puede ser una o pueden ser varias.
         //Por ahora solo van a ser una
+        ArrayList<String> lista_vacunas = new ArrayList<String>();
+            lista_vacunas.add("malota");
+            lista_vacunas.add("rabia");
+            lista_vacunas.add("mejorcito");
+            lista_vacunas.add("alivio2000");
+            int numero_vacuna;
+            numero_vacuna = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese que vacuna desea inyectar \n 1. Malota\n 2. Rabia \n 3. Mejorcito \n 4. Alivio2000"));
+            Vacuna vacuna = new Vacuna(lista_vacunas.get(numero_vacuna-1));
         opcion_animal = Integer.parseInt(JOptionPane.showInputDialog(null, "Ingrese que mascota:\n1. Perro \n2. Gato"));
         if(opcion_animal == 1){        
             Perro perro1 = new Perro(nombre,numero_patas,años,cantidad_vacunas,precio,raza,pais_origen,color);
+            perro1.insertarInyeccion(vacuna);
             perro1.MostrarDatos();
-            JOptionPane.showMessageDialog(null, "Usted eligio Perro", null, 0);
             lista_mascotas.add(perro1);
         }
         else if(opcion_animal == 2){
             Gato gato1 = new Gato(nombre,numero_patas,años,cantidad_vacunas,precio,raza,pais_origen,color);
+            gato1.insertarInyeccion(vacuna);
             gato1.MostrarDatos();
             lista_mascotas.add(gato1);
         }
@@ -64,13 +73,13 @@ public class App {
             int i=0;
         i = Buscar_Mascota(lista_mascotas);
         if(i>=0){
-        String nombre,nombre_vacuna;
+        String nombre;
         byte años;
         int precio,opcion;
         opcion = Integer.parseInt(JOptionPane.showInputDialog(null, "Que desea cambiar de su mascota\n"
-        +"1.Cambia el nombre del perro.\n"
-        +"2. Cambiar la edad del perro\n"
-        +"3. Cambia el total de vacunas y agrega una nueva.(Aun no disponible)\n"
+        +"1.Cambia el nombre de su mascota.\n"
+        +"2. Cambiar la edad de su mascota\n"
+        +"3. Cambia el total de vacunas y agrega una nueva.\n"
         +"4.Cambiar el precio de la mascota"));
         System.out.println("-----------------------------------------------------------------");
         System.out.println("=================================================================");
@@ -79,7 +88,7 @@ public class App {
             //Cambia el nombre del perro.
             System.out.println("Cambia el nombre");
             System.out.println("Nombre actual : "+lista_mascotas.get(i).getNombre());
-            nombre = JOptionPane.showInputDialog(null, "Ingrese el nuevo nombre del perro:");
+            nombre = JOptionPane.showInputDialog(null, "Ingrese el nuevo nombre de su mascota:");
             lista_mascotas.get(i).setNombre(nombre);
             System.out.println("Nombre nuevo : " + lista_mascotas.get(i).getNombre());
             break;
@@ -92,11 +101,7 @@ public class App {
             System.out.println("Edad nueva : " + lista_mascotas.get(i).getAños());
             break;
             case 3:
-            //Cambia el total de vacunas y agrega una nueva.
-            nombre_vacuna = JOptionPane.showInputDialog(null ,"Ingrese el nombre de la vacuna");
-            Vacuna v1 = new Vacuna(nombre_vacuna,(byte)1);
-            lista_mascotas.get(i).insertarInyeccion(v1);
-            lista_mascotas.get(i).imprimirVacunas();
+            Aplicar_Inyeccion(lista_mascotas);
             JOptionPane.showMessageDialog(null,"Cantidad de vacunas actuales: " +lista_mascotas.get(i).cantidad_vacunas());
             break;
             case 4:
@@ -153,11 +158,6 @@ public class App {
                 lista_mascotas.get(i).MostrarDatos();
                 return i;
             }
-            else{
-                System.out.println("-----------------------------------------------------------------");
-                System.out.println("        La mascota no existe en la veterinaria, ingresala.");
-                System.out.println("-----------------------------------------------------------------");
-                }
             }
         }
         return -1;
@@ -177,29 +177,22 @@ public class App {
     }
     public static void VacunaMalota(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
         new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-        ArrayList<Vacuna> vacunas = new ArrayList<Vacuna>();
-        if(vacunas.size()==0){
+        if(lista_mascotas.size()==0){
             System.out.println("-----------------------------------------------------------------");
             System.out.println("        No hay Mascotas con Vacunas en la Veterinaria");
             System.out.println("-----------------------------------------------------------------");
             JOptionPane.showMessageDialog(null, "No es posible Conocer que Mascota tiene la vacuna MALOTA", null, 0);
         }
-        for (int i = 0; i < lista_mascotas.size();i++){
-            vacunas = lista_mascotas.get(i).getVacunas();
+        //Aqui
+            for(int j=0;j<lista_mascotas.size();j++){
+                for(int i=0; i<lista_mascotas.get(j).getVacunas().size();i++){    
+                if(lista_mascotas.get(j).getVacunas().get(i).getNombre().equals("malota")){
+                    System.out.println("-----------------------------------------------------------------");
+                    System.out.println("        La mascota [" + lista_mascotas.get(j).getNombre()+ "] tiene la vacuna malota");
+                    System.out.println("-----------------------------------------------------------------");
+                }
         }
-        for(int i=0; i<vacunas.size();i++){
-            
-            if(vacunas.get(i).getNombre().equals("malota")){
-                System.out.println("-----------------------------------------------------------------");
-                System.out.println("        La mascota [" + lista_mascotas.get(i).getNombre()+ "] tiene la vacuna malota");
-                System.out.println("-----------------------------------------------------------------");
-            }
-            else{
-                System.out.println("-----------------------------------------------------------------");
-                System.out.println("        Ninguna mascota tiene la vacuna malota");
-                System.out.println("-----------------------------------------------------------------");
-            }
-        }
+    }
     }
     public static void Mayor_Precio_Mascotas(ArrayList<Mascota> lista_mascotas) throws InterruptedException, IOException{
     new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
@@ -284,7 +277,7 @@ public class App {
         int i,numero_vacuna;
         i = Buscar_Mascota(lista_mascotas);
         numero_vacuna = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese que vacuna desea inyectar \n 1. Malota\n 2. Rabia \n 3. Mejorcito \n 4. Alivio2000"));
-        Vacuna vacuna = new Vacuna(lista_vacunas.get(numero_vacuna-1),(byte)2);
+        Vacuna vacuna = new Vacuna(lista_vacunas.get(numero_vacuna-1));
         lista_mascotas.get(i).insertarInyeccion(vacuna);
         lista_mascotas.get(i).imprimirVacunas();
     
@@ -297,32 +290,15 @@ public class App {
         while(true){
         opcion = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Insertar mascota\n2. Actualizar mascota\n3. Eliminar mascota\n4. Buscar mascota por nombre\n5. Listar todas las mascotas\n6. Aplicar Vacuna\n7. Salir", null));
         switch(opcion){
-            case 1:Insertar_Mascota(lista_mascotas);break;
-            case 2:Actualizar_Mascota(lista_mascotas);break;
-            case 3:Eliminar_Mascota(lista_mascotas);break;
-            case 4:Buscar_Mascota(lista_mascotas);break;
-            case 5:Listar_Todas_Mascotas(lista_mascotas);break;
-            case 6:Aplicar_Inyeccion(lista_mascotas);break;
-            case 7: System.exit(0);
-            default:
-            break;
+            case 1:Insertar_Mascota(lista_mascotas);break;case 2:Actualizar_Mascota(lista_mascotas);break;case 3:Eliminar_Mascota(lista_mascotas);break;
+            case 4:Buscar_Mascota(lista_mascotas);break;case 5:Listar_Todas_Mascotas(lista_mascotas);break;case 6:Aplicar_Inyeccion(lista_mascotas);break;
+            case 7: System.exit(0);default:break;
         }
         opcion2 = Byte.parseByte(JOptionPane.showInputDialog("Seleccione la opcion que desea: \n1. Qué mascotas tienen la vacuna malota\n2. Cual es el top 5 de las mascotas más costosas.\n3. Que mascotas no tienen país de origen en latinoamérica.", null));
         switch (opcion2) {
-            case 1:VacunaMalota(lista_mascotas);break;
-            case 2:Mayor_Precio_Mascotas(lista_mascotas);break;
-            case 3:Lista_Origen_Mascotas(lista_mascotas);break;
-            default:
-                break;
+            case 1:VacunaMalota(lista_mascotas);break;case 2:Mayor_Precio_Mascotas(lista_mascotas);break;
+            case 3:Lista_Origen_Mascotas(lista_mascotas);break;default:break;
         }
     }
-        
-        /*
-        System.out.println("\n\n");
-        Perro perro1 = new Perro("Kira", (byte)4, (byte)5, (byte)2, 5000000, Raza.Labradores, Pais_Origen.Colombia, Vacunas.rabia,"Dorado");
-        perro1.MostrarDatos();
-        Gato gato1 = new Gato("Mia", (byte)4, (byte)5, (byte)2, 5000000, Raza.Labradores, Pais_Origen.Colombia, Vacunas.rabia,"Dorado");
-        gato1.MostrarDatos();
-         */
     }
 }

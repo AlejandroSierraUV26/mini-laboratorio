@@ -85,14 +85,18 @@ public class Mascota {
     public void insertarInyeccion(Vacuna vacuna){
         vacunas.add(vacuna);
         cantidad_vacunas++;
-    }   
+    }  
+    public String MostrarVacuna(Integer i){
+        return vacunas.get(i).getNombre();
+    }
     public byte cantidad_vacunas(){
         return cantidad_vacunas;
     }
     public void imprimirVacunas(){
         System.out.println("-----------------------------------------------------------------");
+        System.out.println("                    VACUNAS DE LA MASCOTA    Cv:"+ vacunas.size());
         for(int i = 0; i < vacunas.size(); i++){
-            System.out.println("-"+vacunas.get(i).getNombre());
+            System.out.println("                -"+getVacunas().get(i).getNombre());
         }
         System.out.println("-----------------------------------------------------------------");
     }
@@ -108,7 +112,7 @@ public class Mascota {
                         +  "            Raza : " + getRaza() +"                              \n"
                         +  "            Pais Origen : " + getPais_origen() +"                \n"                
                         +  "            Color Pelage : "+ getColor()+"                       "); 
+        imprimirVacunas();                        
         System.out.println("----------------------------------------------------------------");
     }
-
 }
