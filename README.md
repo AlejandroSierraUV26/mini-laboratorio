@@ -3,7 +3,7 @@ Universidad del Valle/Ingeniería en Sistemas
 
 Integrantes:
 
-Juan Manuel Ramirez           Codigo: 2259583
+Juan Manuel Ramirez           Codigo: 2259582
 
 Juan Pablo Castaño Arango     Codigo: 22595487
 
